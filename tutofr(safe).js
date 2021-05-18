@@ -30,12 +30,12 @@
             Lat = initCoord(47.97, 48.5);
             Lon = initCoord(-4, -1);
             Alt = initCoord(-4, 20);
-            let test = {
-              "id": point,
-              "Longitude": Lon,
-              "Lattitude": Lat,
-              "Altitude": Alt,
-            };
+            // let test = {
+            //   "id": point,
+            //   "Longitude": Lon,
+            //   "Lattitude": Lat,
+            //   "Altitude": Alt,
+            // };
             var ville = new Object();
             ville.id = point;
             ville.lat = Lat;

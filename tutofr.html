@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
         <!-- Nous chargeons les fichiers CDN de Leaflet. Le CSS AVANT le JS -->
+        <link rel="stylesheet" type="text/css" href="tutofr.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
-        <link rel="stylesheet" type="text/css" href="tutofr.css" />
         <link rel="stylesheet" type="text/css" href="node_modules/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
-        <style type="text/css">
-            #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
-                height:915px;
-                width: 1900px;
+        <!-- <style type="text/css">
+          body {
+            padding: 0;
+            margin: 0;
+          }
+          .leaflet-top{
+            overflow: auto;
+            height: 100%;
+          }
+          #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+                height: 100vh;
+                width: 100vw;
             }
-        </style>
+        </style> -->
         <title>Carte</title>
     </head>
     <body>

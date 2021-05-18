@@ -9,6 +9,30 @@ path.leaflet-interactive.animate {
         stroke-dashoffset: 0;
     }
 }
+body {
+  padding: 0;
+  margin: 0;
+}
+.leaflet-top{
+  overflow: auto;
+  height: 100%;
+}
+#map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+  height: 100vh;
+  width: 100vw;
+}
+.leaflet-routing-alt, .leaflet-routing-geocoders, .leaflet-routing-error {
+    padding-left: 15px;
+    margin-top: 2px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #ccc;
+    max-height: 320px;
+    overflow-y: auto;
+    transition: all 0.2s ease;
+}
+.leaflet-right, .leaflet-control {
+    margin-right: 5px;
+}
 
 
 /*# sourceMappingURL=/tutofr.feb7927d.css.map */

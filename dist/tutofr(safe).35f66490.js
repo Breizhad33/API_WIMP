@@ -146,13 +146,13 @@ function initPoint() {
     // Pour la Bretagne et ses alentours:
     Lat = initCoord(47.97, 48.5);
     Lon = initCoord(-4, -1);
-    Alt = initCoord(-4, 20);
-    var test = {
-      "id": point,
-      "Longitude": Lon,
-      "Lattitude": Lat,
-      "Altitude": Alt
-    };
+    Alt = initCoord(-4, 20); // let test = {
+    //   "id": point,
+    //   "Longitude": Lon,
+    //   "Lattitude": Lat,
+    //   "Altitude": Alt,
+    // };
+
     var ville = new Object();
     ville.id = point;
     ville.lat = Lat;
@@ -261,7 +261,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38851" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35383" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
