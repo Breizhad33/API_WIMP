@@ -1,0 +1,68 @@
+brouillon:
+
+<?php
+  #Decompose le contenue du fichier en plusieurs element d'un tableau
+  $COOR_1 = file_get_contents('coor.txt', 0);
+  #chaque retour a la ligne = nouveau element dans le tableau
+  $COOR_1A = preg_split('/\n|\r/', $COOR_1);
+  #Compte le nombre d'elements dans le tableau
+  $N = count($COOR_1A);
+  $O = 0;
+  #Affiche, ligne par ligne, le contenue du fichier
+  while ( $O != $N )
+  {
+    #chaque ESPACE = nouveau element dans le tableau)
+    $COOR_1B = preg_split('/\s/', $COOR_1A);
+    $M = count($COOR_1B);
+    $P = 0;
+    while ( $P != $M )
+    {
+      console.log($COOR_1B[$P]."\n");
+      $P++;
+    }
+  }
+?>
+</body>
+</html>
+
+
+<script>
+// Fonction d'initialisation des points (randoms) sur la carte
+function initPoint() {
+for (let Point = 0; Point < 100; Point++){
+
+// Pour la France et ses alentours:
+//Lat = initLat(42, 51);
+//Lon = initLon(-4, 8);
+
+// Pour la Bretagne et ses alentours:
+const Lat = initLat(47.97, 48.5);
+const Lon = initLon(-4, -1);
+let test = {
+"id": Point,
+"Longitude": Lon,
+"Lattitude": Lat
+};
+var ville = new Object();
+ville.id = Point;
+ville.lat = Lat;
+ville.lon = Lon;
+city.push(ville);
+<?php
+//Créer le fichier si il n'existe pas (="a+") et l'ouvre dans la variable
+$COOR = fopen('coordo.txt', 'a+');
+$COOR = fgets($COOR);
+#Reecris par-dessus l'ancien contenue, le nombre choisit et rajoute un espace a la suite pour effacer le second caracteres si le user passe du numero xx au numero x.
+fputs($COOR, '123 \t 456 \t 789 \n');
+fclose($COOR);
+?>
+}
+}
+initPoint();
+
+</script>
+
+
+<meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+
+lang="fr"

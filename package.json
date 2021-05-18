@@ -1,0 +1,17 @@
+{
+  "name": "tutofr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tutofr.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel tutofr.html"
+  },
+  "author": "Erwan",
+  "license": "ISC",
+  "dependencies": {
+    "leaflet-routing-machine": "^3.2.12",
+    "ol": "^6.5.0",
+    "parcel-bundler": "^1.3.1"
+  }
+}

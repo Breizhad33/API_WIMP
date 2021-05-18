@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- Nous chargeons les fichiers CDN de Leaflet. Le CSS AVANT le JS -->
+        <link rel="stylesheet" type="text/css" href="MarkerCluster.css" />
+        <link rel="stylesheet" type="text/css" href="MarkerCluster.Default.css" />
+        <link rel="stylesheet" type="text/css" href="leaflet.css" />
+        <style type="text/css">
+            #map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+                height:915px;
+                width: 1900px;
+            }
+        </style>
+        <title>Carte</title>
+    </head>
+    <body>
+        <div id="map">
+	    <!-- Ici s'affichera la carte -->
+	</div>
+
+        <!-- Fichiers Javascript -->
+        <script type='text/javascript' src="leaflet.js"></script>
+        <script type='text/javascript' src='leaflet.markercluster.js'></script>
+        <!--<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>-->
+        <script src="tutofr.js"></script>
+        <script type="text/javascript">
+        </script>
+    </body>
+</html>
