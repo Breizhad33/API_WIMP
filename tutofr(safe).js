@@ -118,9 +118,9 @@
                  popupAnchor: [-3, -76],
                }
              });
-             var blue_marker = new marker({
-               iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
-               shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+             var red_marker = new marker({
+               iconUrl: 'images/leaf-red.png',
+               shadowUrl: 'images/leaf-shadow.png',
              });
              console.log(city[ville].lat);
              console.log(city[ville].lon);
@@ -141,9 +141,9 @@
              //  });
 
 
-             marker = L.marker([city[ville].lat, city[ville].lon, city[ville].alt]).addTo(macarte);//.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
+             red_marker = L.marker([city[ville].lat, city[ville].lon, city[ville].alt]).addTo(macarte);//.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
              // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
-             marker.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
+             red_marker.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
           }
            macarte.addLayer(markerClusters);
            // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
