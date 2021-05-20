@@ -85,24 +85,27 @@
 
 
           for (var i = 0; i < city.length-1; i++) {
-          //Création du tracé GPS
-            L.Routing.control({
-              waypoints:[
-                //L.latLng(48.56036426785153, -3.1599197957359926),
-                L.latLng(city[i].lat, city[i].lon),
-                //L.latLng(48.51278434587372, -2.779401099923159)],
-                L.latLng(city[i+1].lat, city[i+1].lon)],
-                 router: new L.Routing.OSRMv1({
-                   profile: 'route/v1/driving',         // /!\ IMPORTANT /!\ : Suffixe de serviceUrl
-                   serviceUrl: 'http://192.168.15.87:5000'  // Permet  http://localhost:5000
-                 }),
-              // Class "animate" permet de régler (en CSS) certain détail de l'animation (vitesse d'exécution, temps avant exécution, coleur, etc...)
-              lineOptions: {
-                styles: [{className: 'animate'}]
-              },
-              draggableWaypoints: false,
-              addWaypoints: false
-            }).addTo(macarte);
+            var latlngs = [[city[i].lat, city[i].lon],[city[i+1].lat, city[i+1].lon]];
+            var polyline = L.polyline(latlngs, {color: '#C50022'}).addTo(macarte);
+
+          //Création du tracé GPS qui suit les routes
+            // L.Routing.control({
+            //   waypoints:[
+            //     //L.latLng(48.56036426785153, -3.1599197957359926),
+            //     L.latLng(city[i].lat, city[i].lon),
+            //     //L.latLng(48.51278434587372, -2.779401099923159)],
+            //     L.latLng(city[i+1].lat, city[i+1].lon)],
+            //      router: new L.Routing.OSRMv1({
+            //        profile: 'route/v1/driving',         // /!\ IMPORTANT /!\ : Suffixe de serviceUrl
+            //        serviceUrl: 'http://192.168.15.87:5000'  // Permet  http://localhost:5000
+            //      }),
+            //   // Class "animate" permet de régler (en CSS) certain détail de l'animation (vitesse d'exécution, temps avant exécution, coleur, etc...)
+            //   lineOptions: {
+            //     styles: [{className: 'animate'}]
+            //   },
+            //   draggableWaypoints: false,
+            //   addWaypoints: false
+            // }).addTo(macarte);
           }
 
            //test pour ajout dans tableau city
