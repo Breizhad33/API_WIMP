@@ -31,15 +31,15 @@
             // Lon = initCoord(-4, -1);
             // Alt = initCoord(-4, 20);
 
-            // // Pour Lannion et ses alentours:
-            // Lat = initCoord(48.7861, 48.7041);
-            // Lon = initCoord(-3.5499, -3.3877);
-            // Alt = initCoord(-4, 20);
+            // Pour Lannion et ses alentours:
+            Lat = initCoord(48.7861, 48.7041);
+            Lon = initCoord(-3.5499, -3.3877);
+            Alt = initCoord(-4, 20);
 
             // Pour la vallé du Stanco et ses alentours:
-            Lat = initCoord(48.73565081538279, 48.73746224718652);//48.73746224718652, -3.450671274438872
-            Lon = initCoord(-3.4550969193093337, -3.450671274438872);
-            Alt = initCoord(-4, 20);
+            // Lat = initCoord(48.73565081538279, 48.73746224718652);//48.73746224718652, -3.450671274438872
+            // Lon = initCoord(-3.4550969193093337, -3.450671274438872);
+            // Alt = initCoord(-4, 20);
 
             var ville = new Object();
             ville.id = point;
@@ -111,10 +111,16 @@
            //test pour ajout dans tableau city
            for (ville in city) {
              // Nous définissons l'icône à utiliser pour le marqueur, sa taille affichée (iconSize), sa position (iconAnchor) et le décalage de son ancrage (popupAnchor)
-             var myIcon = L.icon({
-             iconSize: [50, 50],
-             iconAnchor: [25, 50],
-             popupAnchor: [-3, -76],
+             var marker = L.Icon({
+               options: {
+                 iconSize: [50, 50],
+                 iconAnchor: [25, 50],
+                 popupAnchor: [-3, -76],
+               }
+             });
+             var blue_marker = new marker({
+               iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+               shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
              });
              console.log(city[ville].lat);
              console.log(city[ville].lon);
@@ -135,7 +141,7 @@
              //  });
 
 
-             var marker = L.marker([city[ville].lat, city[ville].lon, city[ville].alt]).addTo(macarte);//.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
+             marker = L.marker([city[ville].lat, city[ville].lon, city[ville].alt]).addTo(macarte);//.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
              // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
              marker.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
           }
