@@ -31,9 +31,14 @@
             // Lon = initCoord(-4, -1);
             // Alt = initCoord(-4, 20);
 
-            // Pour Lannion et ses alentours:
-            Lat = initCoord(48.7861, 48.7041);
-            Lon = initCoord(-3.5499, -3.3877);
+            // // Pour Lannion et ses alentours:
+            // Lat = initCoord(48.7861, 48.7041);
+            // Lon = initCoord(-3.5499, -3.3877);
+            // Alt = initCoord(-4, 20);
+
+            // Pour la vallé du Stanco et ses alentours:
+            Lat = initCoord(48.73565081538279, 48.73746224718652);//48.73746224718652, -3.450671274438872
+            Lon = initCoord(-3.4550969193093337, -3.450671274438872);
             Alt = initCoord(-4, 20);
 
             var ville = new Object();
@@ -68,6 +73,17 @@
              radius: 500
           }).addTo(macarte);
 
+          //Création du boutton "afficher Menu"
+          //     /!\ PAS FINI /!\
+          var command = L.control({position: 'topright'});
+          command.onAdd = function (macarte) {
+            var div = L.DomUtil.create('div', 'command');
+            div.innerHTML += '<button><img href="images/icon_plus.png" width="100px" /></button>';
+            return div;
+          };
+          command.addTo(macarte);
+
+
           for (var i = 0; i < city.length-1; i++) {
           //Création du tracé GPS
             L.Routing.control({
@@ -100,7 +116,23 @@
              console.log(city[ville].lat);
              console.log(city[ville].lon);
              console.log(city[ville].alt);
-             var marker = L.marker([city[ville].lat, city[ville].lon, city[ville].alt]).addTo(macarte);
+
+             // var LeafIcon = L.Icon.extend({
+             //      options: {
+             //         iconSize:     [38, 95],
+             //         shadowSize:   [50, 64],
+             //         iconAnchor:   [22, 94],
+             //         shadowAnchor: [4, 62],
+             //         popupAnchor:  [-3, -76]
+             //      }
+             //  });
+             //  var greenIcon = new LeafIcon({
+             //      iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
+             //      shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+             //  });
+
+
+             var marker = L.marker([city[ville].lat, city[ville].lon, city[ville].alt]).addTo(macarte);//.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
              // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
              marker.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
           }
