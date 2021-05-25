@@ -11,7 +11,7 @@
         var list = 0;
         let city = new Array(list);
 
-        //fonction donnant un nombre random entre un min et un max
+        //fonction donnant un nombre random entre un min et un max.
         function initCoord(min, max){
           min = min;
           max = max;
