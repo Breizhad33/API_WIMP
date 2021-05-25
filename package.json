@@ -1,11 +1,11 @@
 {
-  "name": "tutofr",
+  "name": "API_WIMP",
   "version": "1.0.0",
   "description": "",
-  "main": "tutofr.html",
+  "main": "API_WIMP.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel tutofr.html"
+    "start": "parcel API_WIMP.html"
   },
   "author": "Erwan",
   "license": "ISC",
