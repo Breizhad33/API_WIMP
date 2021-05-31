@@ -117,7 +117,22 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"API_WIMP.js":[function(require,module,exports) {
+})({"images/2pattes.png":[function(require,module,exports) {
+module.exports = "/2pattes.97e84504.png";
+},{}],"marker-icon.png":[function(require,module,exports) {
+module.exports = "/marker-icon.8e226d81.png";
+},{}],"images/dogo.png":[function(require,module,exports) {
+module.exports = "/dogo.25f83230.png";
+},{}],"API_WIMP.js":[function(require,module,exports) {
+// const { Client } = require("pg");
+// const client = new Client({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'wimp',
+//   password: 'root',
+//   port: '5432',
+// });
+// client.connect();
 // On initialise la latitude et la longitude de l'habitation du client (centre de la carte)
 // Au préalable séléctionné/donné par l'utilisateur, dans le cas contraire:
 // Se positionner sur Paris.
@@ -125,8 +140,36 @@ var lat_home = 48.73056610085155;
 var lon_home = -3.460834918664013;
 var macarte = null;
 var markerClusters; // Servira à stocker les groupes de marqueurs
+
+var zoom = 12; // Etablit la profondeur du zoom sur lequel la map se charge
+
+function StartZoom() {
+  var zoomF;
+}
+
+function trie(e) {}
+
+function SelectId() {
+  var selectElement = document.getElementById('selectAnimaux');
+  selectElement.addEventListener('change', function (event) {
+    alert(event.target.value);
+  });
+}
+
+function Routage() {} // const _findCollier = (id_client) => {
+//   let request = database.raw("SELECT * FROM colliers WHERE id_client = ?", [id_client], (err, res) => {
+//     //console.log(err ? err.stack : "test ",res.rows[0]) // Hello World!
+//     database.end()
+//   })
+//   return request
+// }
+// _findCollier(request.session.id_client)
+//  .then(foundCollier => {
+//    console.log(foundCollier);
+//  })
 // Nous initialisons un tableau city qui contiendra les "ville"
 //list = nombre d'enregistrement fait par le GPS, sur la BDD, encore accessible
+
 
 var list = 0;
 var city = new Array(list); //fonction donnant un nombre random entre un min et un max
@@ -147,7 +190,7 @@ function initPoint() {
     // Lat = initCoord(47.97, 48.5);
     // Lon = initCoord(-4, -1);
     // Alt = initCoord(-4, 20);
-    // Pour Lannion et ses alentours:
+    // // Pour Lannion et ses alentours:
     Lat = initCoord(48.7861, 48.7041);
     Lon = initCoord(-3.5499, -3.3877);
     Alt = initCoord(-4, 20); // Pour la vallé du Stanco et ses alentours:
@@ -168,7 +211,7 @@ initPoint(); // Fonction d'initialisation de la carte
 
 function initMap() {
   // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-  macarte = L.map('map').setView([lat_home, lon_home], 11);
+  macarte = L.map('map').setView([lat_home, lon_home], zoom);
   markerClusters = L.markerClusterGroup(); // Nous initialisons les groupes de marqueurs
   // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
 
@@ -205,59 +248,67 @@ function initMap() {
     var polyline = L.polyline(latlngs, {
       color: '#C50022'
     }).addTo(macarte); //Création du tracé GPS qui suit les routes
-    // L.Routing.control({
-    //   waypoints:[
-    //     //L.latLng(48.56036426785153, -3.1599197957359926),
-    //     L.latLng(city[i].lat, city[i].lon),
-    //     //L.latLng(48.51278434587372, -2.779401099923159)],
-    //     L.latLng(city[i+1].lat, city[i+1].lon)],
-    //      router: new L.Routing.OSRMv1({
-    //        profile: 'route/v1/driving',         // /!\ IMPORTANT /!\ : Suffixe de serviceUrl
-    //        serviceUrl: 'http://192.168.15.87:5000'  // Permet  http://localhost:5000
-    //      }),
-    //   // Class "animate" permet de régler (en CSS) certain détail de l'animation (vitesse d'exécution, temps avant exécution, coleur, etc...)
-    //   lineOptions: {
-    //     styles: [{className: 'animate'}]
-    //   },
-    //   draggableWaypoints: false,
-    //   addWaypoints: false
-    // }).addTo(macarte);
+    //   L.Routing.control({
+    //     waypoints:[
+    //       //L.latLng(48.56036426785153, -3.1599197957359926),
+    //       L.latLng(city[i].lat, city[i].lon),
+    //       //L.latLng(48.51278434587372, -2.779401099923159)],
+    //       L.latLng(city[i+1].lat, city[i+1].lon)],
+    //        router: new L.Routing.OSRMv1({
+    //          profile: 'route/v1/driving',         // /!\ IMPORTANT /!\ : Suffixe de serviceUrl
+    //          serviceUrl: 'http://192.168.15.87:5000'  // Permet  http://localhost:5000
+    //        }),
+    //     // Class "animate" permet de régler (en CSS) certain détail de l'animation (vitesse d'exécution, temps avant exécution, coleur, etc...)
+    //     lineOptions: {
+    //       styles: [{className: 'animate'}]
+    //     },
+    //     draggableWaypoints: false,
+    //     addWaypoints: false
+    //   }).addTo(macarte);
   } //test pour ajout dans tableau city
 
 
   for (ville in city) {
     // Nous définissons l'icône à utiliser pour le marqueur, sa taille affichée (iconSize), sa position (iconAnchor) et le décalage de son ancrage (popupAnchor)
-    var marker = L.Icon({
+    var myIcon = new L.icon({
+      iconSize: [100, 100],
+      iconAnchor: [25, 50],
+      popupAnchor: [-3, -76]
+    });
+    console.log(city[ville].lat);
+    console.log(city[ville].lon);
+    console.log(city[ville].alt);
+    var LeafIcon = L.Icon.extend({
+      options: {
+        // iconSize:     [25, 50],
+        shadowSize: [50, 64],
+        iconAnchor: [12, 40],
+        shadowAnchor: [4, 62],
+        popupAnchor: [-3, -76]
+      }
+    });
+    var myIcon = new L.icon({
+      iconUrl: require('/images/2pattes.png'),
       options: {
         iconSize: [50, 50],
         iconAnchor: [25, 50],
         popupAnchor: [-3, -76]
       }
     });
-    var red_marker = new marker({
-      iconUrl: 'images/leaf-red.png',
-      shadowUrl: 'images/leaf-shadow.png'
-    });
-    console.log(city[ville].lat);
-    console.log(city[ville].lon);
-    console.log(city[ville].alt); // var LeafIcon = L.Icon.extend({
-    //      options: {
-    //         iconSize:     [38, 95],
-    //         shadowSize:   [50, 64],
-    //         iconAnchor:   [22, 94],
-    //         shadowAnchor: [4, 62],
-    //         popupAnchor:  [-3, -76]
-    //      }
-    //  });
-    //  var greenIcon = new LeafIcon({
-    //      iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-green.png',
-    //      shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
-    //  });
+    var incon = new LeafIcon({
+      iconUrl: require('/marker-icon.png') //shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
 
-    red_marker = L.marker([city[ville].lat, city[ville].lon, city[ville].alt]).addTo(macarte); //.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
+    });
+    var iconDogo = new LeafIcon({
+      iconUrl: require('/images/dogo.png') //shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png'
+
+    });
+    var marker = new L.marker([city[ville].lat, city[ville].lon, city[ville].alt], {
+      icon: incon
+    }).addTo(macarte); //.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
     // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
 
-    red_marker.bindPopup("<b> ".concat(ville, " <b><br>Lattitude: ").concat(city[ville].lat, " <br>Longitude: ").concat(city[ville].lon, " <br>Altitude: ").concat(city[ville].alt, " MAMSL"));
+    marker.bindPopup("<b> ".concat(ville, " <b><br>Lattitude: ").concat(city[ville].lat, " <br>Longitude: ").concat(city[ville].lon, " <br>Altitude: ").concat(city[ville].alt, " MAMSL"));
   }
 
   macarte.addLayer(markerClusters); // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
@@ -269,7 +320,7 @@ window.onload = function () {
   // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
   initMap();
 };
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"/images/2pattes.png":"images/2pattes.png","/marker-icon.png":"marker-icon.png","/images/dogo.png":"images/dogo.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -297,7 +348,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35293" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45839" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

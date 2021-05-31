@@ -1,31 +1,130 @@
 <!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="content-type" content="text/html" ;="" charset="utf-8">
-        <!-- Nous chargeons les fichiers CDN de Leaflet. Le CSS AVANT le JS -->
-         <link rel="stylesheet" type="text/css" href="/leaflet.38992af0.css">
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bienvenue dans mon site</title>
+    <!-- <link href='http://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'> -->
+    <!-- <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'> -->
+    <link rel="stylesheet" href="/style.78032849.css">
+  <script src="/style.78032849.js"></script><script src="/API_WIMP.f552eaf0.js"></script><script src="/leaflet.358e4b20.js"></script><script src="/MarkerCluster.398bd361.js"></script><script src="/MarkerCluster.Default.1f058d7a.js"></script><script src="/leaflet-routing-machine.7bab3c0e.js"></script></head>
+  <body>
+    <nav id="menu" style="visibility: visible; display: block; z-index: 1;">
+        <ul>
+            <div class="centre">
+              <ul class="left-img">
+                <li class="deux"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="trois"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="quatre"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
+              </ul>
+              <li class="wimp">WIMP</li>
+              <ul class="right-img">
+                <li class="deux"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="trois"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="quatre"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
+
+              </ul>
+            </div>
+    </ul></nav>
+
+    <img src="/WIMP-logo.95ac1f1b.png" class="logo" alt="">
+    <img src="/dogo.25f83230.png" class="logo-r" alt="">
+
+
+<div class="flex">
+  <div class="flex-items flex-item-70">
+    <div class="map">
+      <div class="map-date">
+        <input class="notinput" id="date" type="text" name="datetimes">
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+
+        <script>var formatDate = "DD/MM/YYYY HH:mm";
+$(function () {
+  $('input[name="datetimes"]').daterangepicker({
+    timePicker: true,
+    startDate: moment().startOf('hour'),
+    endDate: moment().startOf('hour').add(32, 'hour'),
+    locale: {
+      format: formatDate
+    }
+  }, function (start, end, label) {
+    var date = document.getElementById('date');
+    console.log(date);
+    document.getElementById("date").innerHTML = "Du " + start.format(formatDate) + " au " + end.format(formatDate);
+    console.log(date);
+  });
+});</script>
+      </div>
+      <div class="map-api">
+        <link rel="stylesheet" type="text/css" href="/API_WIMP.f552eaf0.css">
         <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" /> -->
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css">
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css">
+        <link rel="stylesheet" type="text/css" href="/leaflet.358e4b20.css">
+
+        <!-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" /> -->
+        <link rel="stylesheet" type="text/css" href="/MarkerCluster.398bd361.css">
+
+        <!-- <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" /> -->
+        <link rel="stylesheet" type="text/css" href="/MarkerCluster.Default.1f058d7a.css">
+
         <link rel="stylesheet" type="text/css" href="/leaflet-routing-machine.7bab3c0e.css">
-        <link rel="stylesheet" type="text/css" href="/API_WIMP.be0bdfbe.css">
 
-
-        <title>Carte</title>
-
-    <script src="/leaflet.38992af0.js"></script><script src="/leaflet-routing-machine.7bab3c0e.js"></script><script src="/API_WIMP.be0bdfbe.js"></script></head>
-    <body>
-
+        <style>#map{ /* la carte DOIT avoir une hauteur sinon elle n'apparaît pas */
+                width: 100%;
+            }</style>
         <div id="map">
-	         <!-- Ici s'affichera la carte -->
-
-	      </div>
+        <!-- Ici s'affichera la carte -->
+        </div>
 
         <!-- Fichiers Javascript -->
-        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
-        <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+        <script src="/leaflet.44262096.js"></script>
+        <!-- <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script> -->
+
+        <!-- <script type='text/javascript' src='https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js'></script> -->
+        <script src="/leaflet.markercluster.86b3da62.js"></script>
+
         <script src="/leaflet-routing-machine.354ea25e.js"></script>
         <script src="/API_WIMP.5f3377be.js"></script>
-    </body>
+      </div>
+    </div>
+  </div>
+  <div class="flex-items flex-item-30">
+    <div class="options">
+      <div class="options-profil">
+        <a href="/find">
+          <img src="/profil.6b84ca13.png" class="img-profil" alt="">
+        </a>
+        <a href="/deconnexion"><img class="img-profil" src="https://img.icons8.com/pastel-glyph/64/000000/exit--v2.png"></a>
+      </div>
+      <div class="options-api">
+        <form action="home" method="post">
+          <select name="listeAnimaux" id="selectAnimaux" style="height: 10%; width: 100%;">
+            <option value="">--Choisir l'animal--</option>
+            <option name="type" value="55">Edda</option>
+            <option name="type" value="66">Test</option>
+            <option name="type" value="77">Matheo</option>
+          </select>
+          <input type="submit" id="submitList" value="selectionner">
+        </form>
+
+        <!-- <input type="text" name="" value="Types">
+        <input type="text" name="" value="Age"> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mentions">
+  <a class="mentions" href="#">Mentions légales</a>
+</div>
+<script src="https://unpkg.com/js-alert/dist/jsalert.min.js"></script>
+
+</body>
 </html>

@@ -262,7 +262,7 @@ color: white;
   display: flex;
   text-align: center;
   justify-content: center;
-  line-height: 25;
+  /* line-height: 25; */
 }
 
 element.style {
@@ -318,7 +318,7 @@ element.style {
   display: flex;
   text-align: center;
   justify-content: center;
-  line-height: 25;
+  /* line-height: 25; */
 }
 .options {
     height: 85%;
