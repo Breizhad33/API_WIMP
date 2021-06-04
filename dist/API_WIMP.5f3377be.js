@@ -117,71 +117,52 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"images/2pattes.png":[function(require,module,exports) {
-module.exports = "/2pattes.97e84504.png";
-},{}],"marker-icon.png":[function(require,module,exports) {
-module.exports = "/marker-icon.8e226d81.png";
-},{}],"images/dogo.png":[function(require,module,exports) {
-module.exports = "/dogo.25f83230.png";
-},{}],"API_WIMP.js":[function(require,module,exports) {
-// const { Client } = require("pg");
-// const client = new Client({
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'wimp',
-//   password: 'root',
-//   port: '5432',
-// });
-// client.connect();
-// On initialise la latitude et la longitude de l'habitation du client (centre de la carte)
-// Au préalable séléctionné/donné par l'utilisateur, dans le cas contraire:
-// Se positionner sur Paris.
-var lat_home = 48.73056610085155;
-var lon_home = -3.460834918664013;
-var macarte = null;
-var markerClusters; // Servira à stocker les groupes de marqueurs
+})({"Fonctions.js":[function(require,module,exports) {
+var global = arguments[3];
+// fonction permetant de paramêtrer le zoom de départ
+var startZoom = function startZoom(r, t) {
+  global.rayon = r;
+  var compte = new Boolean("true");
+  console.log('rayon: ', r, 'zoom: ', zoom, 'compte: ', compte); //Savoir si il a adéjà un compte avec le bouton "home" configurer
 
-var zoom = 12; // Etablit la profondeur du zoom sur lequel la map se charge
-
-function StartZoom() {
-  var zoomF;
-}
-
-function trie(e) {}
-
-function SelectId() {
-  var selectElement = document.getElementById('selectAnimaux');
-  selectElement.addEventListener('change', function (event) {
-    alert(event.target.value);
-  });
-}
-
-function Routage() {} // const _findCollier = (id_client) => {
-//   let request = database.raw("SELECT * FROM colliers WHERE id_client = ?", [id_client], (err, res) => {
-//     //console.log(err ? err.stack : "test ",res.rows[0]) // Hello World!
-//     database.end()
-//   })
-//   return request
-// }
-// _findCollier(request.session.id_client)
-//  .then(foundCollier => {
-//    console.log(foundCollier);
-//  })
-// Nous initialisons un tableau city qui contiendra les "ville"
-//list = nombre d'enregistrement fait par le GPS, sur la BDD, encore accessible
+  if (compte = true) {
+    zoom = rayon / 100;
+  } else {
+    zoom = 16;
+  }
+}; //fonction pour trier les distances entres les points groupes
+// Si distance < à 100 mètres, faire fondre le point dans le tracé
+// Sinon afficher un point classique
+//cf: https://www.movable-type.co.uk/scripts/latlong.html
 
 
-var list = 0;
-var city = new Array(list); //fonction donnant un nombre random entre un min et un max
+var trie = function trie(e) {
+  var r = 6371; // km  (mètres (e3))
 
-function initCoord(min, max) {
+  var φ1 = e.lat[0] * Math.PI / 180; // φ, λ en radians
+
+  var φ2 = e.lat[1] * Math.PI / 180;
+  var Δφ = (e.lat[1] - e.lat[0]) * Math.PI / 180;
+  var Δλ = (e.lon[1] - e.lon[0]) * Math.PI / 180;
+  console.log("φ1:", φ1, ", φ2:", φ2, ", Δφ:", Δφ, "Δλ :", Δλ);
+  var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = r * c; // en km (en mètres)
+
+  console.log("a:", a, ", c:", c, ", distance:", d);
+};
+
+var routage = function routage(x, y) {}; //fonction donnant un nombre random entre un min et un max
+
+
+var initCoord = function initCoord(min, max) {
   min = min;
   max = max;
   return Math.random() * (max - min) + min;
-} // Fonction d'initialisation de points (randoms) sur la carte
+}; // Fonction d'initialisation de points (randoms) sur la carte
 
 
-function initPoint() {
+var initPoint = function initPoint(city) {
   for (var point = 0; point < 10; point++) {
     // Pour la France et ses alentours:
     //Lat = initCoord(42, 51);
@@ -190,7 +171,7 @@ function initPoint() {
     // Lat = initCoord(47.97, 48.5);
     // Lon = initCoord(-4, -1);
     // Alt = initCoord(-4, 20);
-    // // Pour Lannion et ses alentours:
+    // Pour Lannion et ses alentours:
     Lat = initCoord(48.7861, 48.7041);
     Lon = initCoord(-3.5499, -3.3877);
     Alt = initCoord(-4, 20); // Pour la vallé du Stanco et ses alentours:
@@ -204,13 +185,73 @@ function initPoint() {
     ville.lon = Lon;
     ville.alt = Alt;
     city.push(ville);
+
+    if (ville.id > 0) {
+      trie(ville);
+    }
   }
+};
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
 }
 
-initPoint(); // Fonction d'initialisation de la carte
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+module.exports = {
+  initPoint: initPoint,
+  trie: trie,
+  routage: routage,
+  initCoord: initCoord,
+  startZoom: startZoom
+}; // function select(){
+//   const text = 'SELECT * FROM animaux'
+//   // callback
+//   pool.query(text, (err, res) => {
+//     if (err) {
+//       console.log("coucou")
+//     } else {
+//       console.log("non")
+//     }
+//   })
+//   return 0;
+// }
+// function SelectId(){
+//   const selectElement = document.getElementById('selectAnimaux');
+//   selectElement.addEventListener('change', (event) => {
+//     alert(event.target.value);
+//   });
+// }
+},{}],"images/2pattes.png":[function(require,module,exports) {
+module.exports = "/2pattes.97e84504.png";
+},{}],"marker-icon.png":[function(require,module,exports) {
+module.exports = "/marker-icon.8e226d81.png";
+},{}],"images/dogo.png":[function(require,module,exports) {
+module.exports = "/dogo.25f83230.png";
+},{}],"API_WIMP.js":[function(require,module,exports) {
+var global = arguments[3];
+var fs = require("./Fonctions.js"); // On initialise la latitude et la longitude de l'habitation du client (centre de la carte)
+// Au préalable séléctionné/donné par l'utilisateur, dans le cas contraire:
+// Se positionner sur Paris.
+
+
+var lat_home = 48.73056610085155;
+var lon_home = -3.460834918664013;
+var macarte = null;
+var markerClusters; // Servira à stocker les groupes de marqueurs
+
+global.zoom = 12; // Etablit la profondeur du zoom sur lequel la map se charge
+// Nous initialisons un tableau city qui contiendra les "ville"
+//list = nombre d'enregistrement fait par le GPS, sur la BDD, encore accessible
+
+var list = 0;
+var city = new Array(list); // Fonction d'initialisation de la carte
 
 function initMap() {
-  // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+  fs.initPoint(city); // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+
   macarte = L.map('map').setView([lat_home, lon_home], zoom);
   markerClusters = L.markerClusterGroup(); // Nous initialisons les groupes de marqueurs
   // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut. Nous devons lui préciser où nous souhaitons les récupérer. Ici, openstreetmap.fr
@@ -220,7 +261,11 @@ function initMap() {
     attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
     minZoom: 1,
     maxZoom: 20
-  }).addTo(macarte); //Création du périmêtre de la maison, autour du quel, la position du chien n'est pas pris en compte
+  }).addTo(macarte); // 
+  //            map.on('click', function(e) {
+  //     alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+  // });
+  //Création du périmêtre de la maison, autour du quel, la position du chien n'est pas pris en compte
 
   var home = L.circle([48.732675, -3.446217], {
     color: 'red',
@@ -228,7 +273,10 @@ function initMap() {
     fillOpacity: 0.5,
     //Radius = Rayon "Maison"
     radius: 500
-  }).addTo(macarte); //Création du boutton "afficher Menu"
+  }).addTo(macarte);
+  console.log('home.radius: ', home._mRadius);
+  console.log('xxxxxxxxxxx: ', zoom);
+  fs.startZoom(home._mRadius, zoom); //Création du boutton "afficher Menu"
   //     /!\ PAS FINI /!\
 
   var command = L.control({
@@ -308,7 +356,7 @@ function initMap() {
     }).addTo(macarte); //.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
     // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
 
-    marker.bindPopup("<b> ".concat(ville, " <b><br>Lattitude: ").concat(city[ville].lat, " <br>Longitude: ").concat(city[ville].lon, " <br>Altitude: ").concat(city[ville].alt, " MAMSL"));
+    marker.bindPopup("<b>Coordonn\xE9es: ".concat(ville, " <b><br>Lattitude: ").concat(city[ville].lat, " <br>Longitude: ").concat(city[ville].lon, " <br>Altitude: ").concat(city[ville].alt, " MAMSL"));
   }
 
   macarte.addLayer(markerClusters); // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
@@ -320,7 +368,7 @@ window.onload = function () {
   // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
   initMap();
 };
-},{"/images/2pattes.png":"images/2pattes.png","/marker-icon.png":"marker-icon.png","/images/dogo.png":"images/dogo.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./Fonctions.js":"Fonctions.js","/images/2pattes.png":"images/2pattes.png","/marker-icon.png":"marker-icon.png","/images/dogo.png":"images/dogo.png"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -348,7 +396,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45839" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43531" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

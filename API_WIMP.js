@@ -1,12 +1,6 @@
-// const { Client } = require("pg");
-// const client = new Client({
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'wimp',
-//   password: 'root',
-//   port: '5432',
-// });
-// client.connect();
+
+const fs = require("./Fonctions.js");
+
 // On initialise la latitude et la longitude de l'habitation du client (centre de la carte)
 // Au préalable séléctionné/donné par l'utilisateur, dans le cas contraire:
 // Se positionner sur Paris.
@@ -15,88 +9,17 @@
         var lon_home = -3.460834918664013;
         var macarte = null;
         var markerClusters; // Servira à stocker les groupes de marqueurs
-        var zoom = 12; // Etablit la profondeur du zoom sur lequel la map se charge
-
-        function StartZoom(){
-          var zoomF;
-
-        }
-
-        function trie(e){
-
-        }
-
-        function SelectId(){
-          const selectElement = document.getElementById('selectAnimaux');
-          selectElement.addEventListener('change', (event) => {
-            alert(event.target.value);
-          });
-        }
-
-        function Routage(){
-
-        }
-
-        // const _findCollier = (id_client) => {
-        //   let request = database.raw("SELECT * FROM colliers WHERE id_client = ?", [id_client], (err, res) => {
-        //     //console.log(err ? err.stack : "test ",res.rows[0]) // Hello World!
-        //     database.end()
-        //   })
-        //   return request
-        // }
-        // _findCollier(request.session.id_client)
-        //  .then(foundCollier => {
-        //    console.log(foundCollier);
-        //  })
-
+        global.zoom = 12; // Etablit la profondeur du zoom sur lequel la map se charge
 
         // Nous initialisons un tableau city qui contiendra les "ville"
         //list = nombre d'enregistrement fait par le GPS, sur la BDD, encore accessible
         var list = 0;
         let city = new Array(list);
 
-        //fonction donnant un nombre random entre un min et un max
-        function initCoord(min, max){
-          min = min;
-          max = max;
-          return Math.random() * (max - min) + min;
-        }
-
-        // Fonction d'initialisation de points (randoms) sur la carte
-        function initPoint() {
-          for (let point = 0; point < 10; point++){
-
-            // Pour la France et ses alentours:
-            //Lat = initCoord(42, 51);
-            //Lon = initCoord(-4, 8);
-
-            // Pour la Bretagne et ses alentours:
-            // Lat = initCoord(47.97, 48.5);
-            // Lon = initCoord(-4, -1);
-            // Alt = initCoord(-4, 20);
-
-            // // Pour Lannion et ses alentours:
-            Lat = initCoord(48.7861, 48.7041);
-            Lon = initCoord(-3.5499, -3.3877);
-            Alt = initCoord(-4, 20);
-
-            // Pour la vallé du Stanco et ses alentours:
-            // Lat = initCoord(48.73565081538279, 48.73746224718652);//48.73746224718652, -3.450671274438872
-            // Lon = initCoord(-3.4550969193093337, -3.450671274438872);
-            // Alt = initCoord(-4, 20);
-
-            var ville = new Object();
-            ville.id = point;
-            ville.lat = Lat;
-            ville.lon = Lon;
-            ville.alt = Alt;
-            city.push(ville);
-          }
-        }
-        initPoint();
-
         // Fonction d'initialisation de la carte
         function initMap() {
+
+           fs.initPoint(city);
   	       // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
   	       macarte = L.map('map').setView([lat_home, lon_home], zoom);
            markerClusters = L.markerClusterGroup(); // Nous initialisons les groupes de marqueurs
@@ -107,6 +30,10 @@
 		           minZoom: 1,
 		           maxZoom: 20
   	       }).addTo(macarte);
+// 
+//            map.on('click', function(e) {
+//     alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
+// });
 
            //Création du périmêtre de la maison, autour du quel, la position du chien n'est pas pris en compte
            var home = L.circle([48.732675, -3.446217], {
@@ -116,6 +43,11 @@
              //Radius = Rayon "Maison"
              radius: 500
           }).addTo(macarte);
+          console.log('home.radius: ', home._mRadius);
+          console.log('xxxxxxxxxxx: ', zoom);
+
+          fs.startZoom(home._mRadius, zoom);
+
 
           //Création du boutton "afficher Menu"
           //     /!\ PAS FINI /!\
@@ -196,11 +128,11 @@
 
              var marker = new L.marker([city[ville].lat, city[ville].lon, city[ville].alt], {icon: incon}).addTo(macarte);//.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
              // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
-             marker.bindPopup(`<b> ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
+             marker.bindPopup(`<b>Coordonnées: ${ville} <b><br>Lattitude: ${city[ville].lat} <br>Longitude: ${city[ville].lon} <br>Altitude: ${city[ville].alt} MAMSL`);
           }
            macarte.addLayer(markerClusters);
            // Nous ajoutons la popup. A noter que son contenu (ici la variable ville) peut être du HTML
-           home.bindPopup("Maison")
+           home.bindPopup("Maison");
         }
         window.onload = function(){
 		    // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
