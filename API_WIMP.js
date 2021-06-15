@@ -1,4 +1,3 @@
-
 const fs = require("./Fonctions.js");
 
 // On initialise la latitude et la longitude de l'habitation du client (centre de la carte)
@@ -30,7 +29,7 @@ const fs = require("./Fonctions.js");
 		           minZoom: 1,
 		           maxZoom: 20
   	       }).addTo(macarte);
-// 
+//
 //            map.on('click', function(e) {
 //     alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
 // });
@@ -89,7 +88,7 @@ const fs = require("./Fonctions.js");
              // Nous définissons l'icône à utiliser pour le marqueur, sa taille affichée (iconSize), sa position (iconAnchor) et le décalage de son ancrage (popupAnchor)
              var myIcon = new L.icon({
                iconSize: [100, 100],
-               iconAnchor: [25, 50],
+               iconAnchor: [25, 100],
                popupAnchor: [-3, -76],
              });
              console.log(city[ville].lat);
@@ -110,7 +109,7 @@ const fs = require("./Fonctions.js");
                 iconUrl: require('/images/2pattes.png'),
                 options: {
                   iconSize: [50, 50],
-                  iconAnchor: [25, 50],
+                  iconAnchor: [250, 500],
                   popupAnchor: [-3, -76],
                 }
               });

@@ -9,60 +9,62 @@
     <link rel="stylesheet" href="/style.78032849.css">
   <script src="/style.78032849.js"></script><script src="/API_WIMP.f552eaf0.js"></script><script src="/leaflet.358e4b20.js"></script><script src="/MarkerCluster.398bd361.js"></script><script src="/MarkerCluster.Default.1f058d7a.js"></script><script src="/leaflet-routing-machine.7bab3c0e.js"></script></head>
   <body>
-    <nav id="menu" style="visibility: visible; display: block; z-index: 1;">
+    <!-- <nav id="menu" style="visibility: visible; display: block; z-index: 1;">
         <ul>
             <div class="centre">
               <ul class="left-img">
-                <li class="deux"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
-                <li class="trois"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
-                <li class="quatre"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
-                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
-                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="deux"><img src="images/2pattes.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="trois"><img src="images/2pattes.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="quatre"><img src="images/2pattes.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="autre"><img src="images/2pattes.png" height="40" class="nav-item left" alt="logo"></li>
+                <li class="autre"><img src="images/2pattes.png" height="40" class="nav-item left" alt="logo"></li>
               </ul>
               <li class="wimp">WIMP</li>
               <ul class="right-img">
-                <li class="deux"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
-                <li class="trois"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
-                <li class="quatre"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
-                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
-                <li class="autre"><img src="/2pattes.97e84504.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="deux"><img src="images/2pattes.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="trois"><img src="images/2pattes.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="quatre"><img src="images/2pattes.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="autre"><img src="images/2pattes.png" height="40" class="nav-item right" alt="logo"></li>
+                <li class="autre"><img src="images/2pattes.png" height="40" class="nav-item right" alt="logo"></li>
 
               </ul>
             </div>
-    </ul></nav>
+    </nav>
 
-    <img src="/WIMP-logo.95ac1f1b.png" class="logo" alt="">
-    <img src="/dogo.25f83230.png" class="logo-r" alt="">
+    <img src="images/WIMP-logo.png" class="logo" alt="">
+    <img src="images/dogo.png" class="logo-r" alt="">
 
 
 <div class="flex">
   <div class="flex-items flex-item-70">
     <div class="map">
       <div class="map-date">
-        <input class="notinput" id="date" type="text" name="datetimes">
+        <input class="notinput" id="date" type="text" name="datetimes" />
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
-        <script>var formatDate = "DD/MM/YYYY HH:mm";
-$(function () {
-  $('input[name="datetimes"]').daterangepicker({
-    timePicker: true,
-    startDate: moment().startOf('hour'),
-    endDate: moment().startOf('hour').add(32, 'hour'),
-    locale: {
-      format: formatDate
-    }
-  }, function (start, end, label) {
-    var date = document.getElementById('date');
-    console.log(date);
-    document.getElementById("date").innerHTML = "Du " + start.format(formatDate) + " au " + end.format(formatDate);
-    console.log(date);
-  });
-});</script>
-      </div>
+        <script>
+        var formatDate = "DD/MM/YYYY HH:mm";
+        $(function() {
+          $('input[name="datetimes"]').daterangepicker({
+            timePicker: true,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(32, 'hour'),
+            locale: {
+              format: formatDate
+            }
+          }, function(start, end, label) {
+            var date = document.getElementById('date');
+            console.log(date);
+            document.getElementById("date").innerHTML = "Du "+ start.format(formatDate) +  " au "  + end.format(formatDate);
+            console.log(date);
+          });
+        });
+        </script>
+      </div> -->
       <div class="map-api">
         <link rel="stylesheet" type="text/css" href="/API_WIMP.f552eaf0.css">
         <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" /> -->
@@ -78,22 +80,22 @@ $(function () {
 
         <div id="map">
         <!-- Ici s'affichera la carte -->
-        <button class="open-button" onclick="openForm()">Chat</button>
-          <div class="chat-popup" id="inner">
+        <!-- <button class="open-button" onclick="openForm()">Chat</button> -->
+          <!-- <div class="chat-popup" id="inner">
             <form action="/action_page.php" class="form-container">
              <h1 id="titre_home">Configuration "home" :<br><br></h1>
 
              <label for="Lat"><b>Lattitude:</b></label>
-             <textarea placeholder="Coordonnées... Exemple: 48.730566100851 (en degrée)" name="msg" required=""></textarea>
+             <textarea placeholder="Coordonnées... Exemple: 48.730566100851 (en degrée)" name="msg" required></textarea>
              <label for="Lon"><b>Longitude:</b></label>
-             <textarea placeholder="Coordonnées... Exemple: -3.4608349186640 (en degrée)" name="msg" required=""></textarea>
+             <textarea placeholder="Coordonnées... Exemple: -3.4608349186640 (en degrée)" name="msg" required></textarea>
              <label for="rayon"><b>Rayon:</b></label>
-             <textarea placeholder="Distance de la maison... Exemple: 450 (en mètres)" name="msg" required=""></textarea>
+             <textarea placeholder="Distance de la maison... Exemple: 450 (en mètres)" name="msg" required></textarea>
 
              <button type="submit" class="btn">Send</button>
              <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
             </form>
-          </div>
+          </div> -->
         </div>
 
         <!-- Fichiers Javascript -->
@@ -107,30 +109,30 @@ $(function () {
         <script type="text/javascript" src="/Fonctions.3c6cfe5e.js"></script>
         <script type="text/javascript" src="/API_WIMP.5f3377be.js"></script>
       </div>
-    </div>
+    <!-- </div>
   </div>
   <div class="flex-items flex-item-30">
     <div class="options">
       <div class="options-profil">
         <a href="/find">
-          <img src="/profil.6b84ca13.png" class="img-profil" alt="">
+          <img src="images/profil.png" class="img-profil" alt="">
         </a>
-        <a href="/deconnexion"><img class="img-profil" src="https://img.icons8.com/pastel-glyph/64/000000/exit--v2.png"></a>
+        <a href="/deconnexion"><img class="img-profil" src="https://img.icons8.com/pastel-glyph/64/000000/exit--v2.png"/></a>
       </div>
       <div class="options-api">
-        <form action="home" method="post">
+        <form action='home' method='post'>
           <select name="listeAnimaux" id="selectAnimaux" style="height: 10%; width: 100%;">
             <option value="">--Choisir l'animal--</option>
             <option name="type" value="55">Edda</option>
             <option name="type" value="66">Test</option>
             <option name="type" value="77">Matheo</option>
           </select>
-          <input type="submit" id="submitList" value="selectionner">
-        </form>
+          <input type='submit' id='submitList' value='selectionner'/>
+        </form> -->
 
         <!-- <input type="text" name="" value="Types">
         <input type="text" name="" value="Age"> -->
-      </div>
+      <!-- </div>
     </div>
   </div>
 </div>
@@ -138,7 +140,7 @@ $(function () {
 <div class="mentions">
   <a class="mentions" href="#">Mentions légales</a>
 </div>
-<script src="https://unpkg.com/js-alert/dist/jsalert.min.js"></script>
+<script src="https://unpkg.com/js-alert/dist/jsalert.min.js"></script> -->
 
 </body>
 </html>

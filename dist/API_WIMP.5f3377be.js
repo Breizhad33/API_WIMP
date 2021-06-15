@@ -261,7 +261,7 @@ function initMap() {
     attribution: 'données © OpenStreetMap/ODbL - rendu OSM France',
     minZoom: 1,
     maxZoom: 20
-  }).addTo(macarte); // 
+  }).addTo(macarte); //
   //            map.on('click', function(e) {
   //     alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
   // });
@@ -320,7 +320,7 @@ function initMap() {
     // Nous définissons l'icône à utiliser pour le marqueur, sa taille affichée (iconSize), sa position (iconAnchor) et le décalage de son ancrage (popupAnchor)
     var myIcon = new L.icon({
       iconSize: [100, 100],
-      iconAnchor: [25, 50],
+      iconAnchor: [25, 100],
       popupAnchor: [-3, -76]
     });
     console.log(city[ville].lat);
@@ -339,7 +339,7 @@ function initMap() {
       iconUrl: require('/images/2pattes.png'),
       options: {
         iconSize: [50, 50],
-        iconAnchor: [25, 50],
+        iconAnchor: [250, 500],
         popupAnchor: [-3, -76]
       }
     });
@@ -396,7 +396,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43531" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36915" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

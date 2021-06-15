@@ -41,7 +41,8 @@ body {
   width: 100vw;
 }  */
 #map{
-      width:100%;
+      width:100vw;
+      height: 100vh;
 }
 /* #inner{
       width: 50%;
@@ -59,6 +60,10 @@ body {
 h1{
   text-shadow: 2px 2px 5px #3399FF;
 }
+
+
+/* Boutton configurant le cercle home sur la carte */
+                  /* DEBUT*/
 
 {box-sizing: border-box;}
 
@@ -132,3 +137,4 @@ h1{
 .form-container .btn:hover, .open-button:hover {
  opacity: 1;
 }
+/* FIN*/
